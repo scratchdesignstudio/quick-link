@@ -1,0 +1,35 @@
+a:link{
+  color: white;
+  background-color: transparent;
+  text-decoration: none;
+}
+a:visited{
+  color: white;
+  background-color: transparent;
+  text-decoration: none;
+}
+a:hover{
+  color: black;
+  background-color: transparent;
+  text-decoration: none;
+}
+a:active{
+  color: black;
+  background-color: transparent;
+  text-decoration: none;
+}
+#link{
+  display: block;
+  text-align: center;
+}
+body{
+  background-color: #3399CC;
+  font-family: 'scratch', sans-serif;
+  text-align: center;
+  font-size: 5em;
+  position: absolute;
+  top: 50%;
+  margin-left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%)
+}
