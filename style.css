@@ -1,3 +1,8 @@
+@font-face {
+    font-family: scratchFont;
+    src: url(scratch.ttf);
+}
+
 a:link{
   color: white;
   background-color: transparent;
@@ -24,7 +29,7 @@ a:active{
 }
 body{
   background-color: #3399CC;
-  font-family: 'scratch', sans-serif;
+  font-family: 'scratchFont', sans-serif;
   text-align: center;
   font-size: 5em;
   position: absolute;
