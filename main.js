@@ -1,7 +1,7 @@
 var studioid = 1788915;
 
 function getLastComment(){
-  
+  changeLink(formatLink(18200431)); //filler comment id, just a test
 }
 
 function formatLink(lastCommentId){
