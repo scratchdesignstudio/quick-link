@@ -26,12 +26,17 @@ a:active{
 #link{
   display: block;
   text-align: center;
+  font-size: 5em;
+}
+#projectcount{
+    display: block;
+    text-align: center;
+    font-size: 3em;
 }
 body{
   background-color: #0c9ce4;
   font-family: 'scratchFont', sans-serif;
   text-align: center;
-  font-size: 5em;
   position: absolute;
   top: 50%;
   margin-left: 50%;
