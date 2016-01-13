@@ -1,5 +1,5 @@
 var studioid = 1788915;
-var curators = ["technoboy10", "The_Grits", "4LeafClovR", "puppymk", "Malik44", "CrazyNimbus", "fmtfmtfmt2", "GreenIeaf", "st19_galla"]; //Probably more than this
+var curators = ["technoboy10", "The_Grits", "4LeafClovR", "puppymk", "Malik44", "CrazyNimbus", "fmtfmtfmt2", "GreenIeaf", "st19_galla", "joletole", "Hamish752", "ceebee", "speakvisually"];
 var foobar;
 function getUnread(page){
   var commentList;
