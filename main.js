@@ -60,7 +60,7 @@ function changeLink(link){
 }
 
 function changecount(count){
-  document.getElementById("projectcount").innerHTML = count + " projects left to add!"
+  document.getElementById("projectcount").innerHTML = count + " projects left to review!"
 }
 
 function nextLink(){
