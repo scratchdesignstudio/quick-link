@@ -22,6 +22,8 @@ function getLastComment(page){
     for (j = 0; j < replyList.length; j++){ //go through replies
       if(curators.indexOf(replyList[j].querySelector(".info > .name > a").innerHTML) != -1){ //pick comment by a curator
         lastReply = i;
+
+        //TODO: Check for 'added to studio' or 'added for you'
       }
     }
   }
