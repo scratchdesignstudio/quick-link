@@ -32,6 +32,7 @@ a:active{
     display: block;
     text-align: center;
     font-size: 2em;
+    color: white;
 }
 body{
   background-color: #0c9ce4;
