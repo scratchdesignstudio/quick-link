@@ -57,6 +57,10 @@ function changeLink(link){
   document.getElementById("link").href=link;
 }
 
+function changecount(count){
+  document.getElementById("projectcount").innerHTML = count + " projects left to add!"
+}
+
 function nextLink(){
   for (page = 10; page > 0; page--){
     var link = getUnread(page);
