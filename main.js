@@ -62,8 +62,7 @@ function nextLink(){
     var link = getUnread(page);
     console.log(page + " and " + link)
     if (link){
-      changeLink(formatLink(link));
-      break;
+      return formatLink(link);
     }
   }
 }

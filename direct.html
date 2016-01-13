@@ -4,7 +4,9 @@
     <link rel='stylesheet' type='text/css' href='style.css'>
     <script src='main.js'></script>
   </head>
-  <body onload="changeLink(nextLink())">
-    <a id="link" href="https://scratch.mit.edu">Next project!</a>
+  <body onload="window.location.replace(nextLink())">
+    <p id="link">
+      Loading...
+    </p>
   </body>
 </html>
