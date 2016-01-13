@@ -1,15 +1,22 @@
 var studioid = 1788915;
 var curators = ["technoboy10", "The_Grits", "4LeafClovR", "puppymk", "Malik44", "CrazyNimbus", "fmtfmtfmt2", "GreenIeaf", "st19_galla"]; //Probably more than this
 var foobar;
-function getLastComment(page){
+function getUnread(page){
   var commentList;
-  //Grab
+  //Grab comments
   var xml = new XMLHttpRequest();
   xml.onreadystatechange = function(){
     if (xml.readyState = 4){
       var container = document.implementation.createHTMLDocument().documentElement;
       container.innerHTML = xml.responseText;
-      commentList = Array.from(container.querySelectorAll('.top-level-reply > .replies')).reverse();
+      commentList = Array.from(container.querySelectorAll('.top-level-reply > .replies')).reverse().filter( //Get only comments with links in them
+        function(comment){
+          var c = comment.querySelector(".info > .content");
+          if (c){
+            return c.innerHTML.match(/projects\/[0-9]+/) == null;
+          }
+        }
+      );
     }
   }
   xml.open("GET", "https://crossorigin.me/https://scratch.mit.edu/site-api/comments/gallery/" + studioid + "/?page=" + page , false);
@@ -21,14 +28,14 @@ function getLastComment(page){
     var replyList = commentList[i].querySelectorAll('.reply > .comment'); //Get all comments
     for (j = 0; j < replyList.length; j++){ //go through replies
       if(curators.indexOf(replyList[j].querySelector(".info > .name > a").innerHTML) != -1){ //pick comment by a curator
-        lastReply = i;
-
-        //TODO: Check for 'added to studio' or 'added for you'
+        if (replyList[j].querySelector(".info > .content").textContent.match(/added/i)){
+          lastReply = i;
+        }
       }
     }
   }
   if (lastReply == commentList.length-1){
-    return false; //All comments on page have been checked, so this should return the first comment (commentList[0]) if the next page *isn't* done
+    return false; //All comments on page have been checked, so this should return the first comment of the next page (commentList[0]) if the next page *isn't* done
   } else {
     return commentList[lastReply+1].getAttribute('data-thread'); // last unread link
   }
@@ -41,4 +48,15 @@ function formatLink(lastCommentId){
 
 function changeLink(link){
   document.getElementById("link").href=link;
+}
+
+function nextLink(){
+  for (page = 10; page > 0; page--){
+    var link = getUnread(page);
+    console.log(page + " and " + link)
+    if (link){
+      changeLink(formatLink(link));
+      break;
+    }
+  }
 }
