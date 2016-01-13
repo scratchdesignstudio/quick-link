@@ -3,20 +3,27 @@ var curators = ["technoboy10", "The_Grits", "4LeafClovR", "puppymk", "Malik44", 
 var foobar;
 function getUnread(page){
   var commentList;
+  var topList;
   //Grab comments
   var xml = new XMLHttpRequest();
   xml.onreadystatechange = function(){
     if (xml.readyState = 4){
       var container = document.implementation.createHTMLDocument().documentElement;
       container.innerHTML = xml.responseText;
-      commentList = Array.from(container.querySelectorAll('.top-level-reply > .replies')).reverse().filter( //Get only comments with links in them
+      commentList = Array.from(container.querySelectorAll('.top-level-reply')).reverse().filter( //Get only comments with links in them
         function(comment){
-          var c = comment.querySelector(".info > .content");
+          var c = comment.querySelector(".comment > .info > .content");
           if (c){
-            return c.innerHTML.match(/projects\/[0-9]+/) == null;
+            console.log(c.innerHTML + ' ' + c.innerHTML.match(/projects\/[0-9]+/))
+            return c.innerHTML.match(/projects\/[0-9]+/) != null;
           }
         }
-      );
+      ).map(
+        function(comment){
+          return comment.querySelector('.replies');
+        }
+      )
+
     }
   }
   xml.open("GET", "https://crossorigin.me/https://scratch.mit.edu/site-api/comments/gallery/" + studioid + "/?page=" + page , false);
