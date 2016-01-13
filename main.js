@@ -1,6 +1,6 @@
 var studioid = 1788915;
 var curators = ["technoboy10", "The_Grits", "4LeafClovR", "puppymk", "Malik44", "CrazyNimbus", "fmtfmtfmt2", "GreenIeaf", "st19_galla", "joletole", "Hamish752", "ceebee", "speakvisually"];
-var foobar;
+var count = 0;
 function getUnread(page){
   var commentList;
   var topList;
@@ -14,7 +14,6 @@ function getUnread(page){
         function(comment){
           var c = comment.querySelector(".comment > .info > .content");
           if (c){
-            console.log(c.innerHTML + ' ' + c.innerHTML.match(/projects\/[0-9]+/))
             return c.innerHTML.match(/projects\/[0-9]+/) != null;
           }
         }
@@ -30,6 +29,7 @@ function getUnread(page){
   xml.send(null);
 
   //Parse through array
+  var tempCount = commentList.length;
   var lastReply = -1;
   for (i = 0; i < commentList.length; i++){
     var replyList = commentList[i].querySelectorAll('.reply > .comment'); //Get all comments
@@ -37,6 +37,7 @@ function getUnread(page){
       if(curators.indexOf(replyList[j].querySelector(".info > .name > a").innerHTML) != -1){ //pick comment by a curator
         if (replyList[j].querySelector(".info > .content").textContent.match(/added/i)){
           lastReply = i;
+          tempCount--;
         }
       }
     }
@@ -44,6 +45,7 @@ function getUnread(page){
   if (lastReply == commentList.length-1){
     return false; //All comments on page have been checked, so this should return the first comment of the next page (commentList[0]) if the next page *isn't* done
   } else {
+    count += tempCount;
     return commentList[lastReply+1].getAttribute('data-thread'); // last unread link
   }
 
@@ -62,11 +64,15 @@ function changecount(count){
 }
 
 function nextLink(){
-  for (page = 10; page > 0; page--){
-    var link = getUnread(page);
-    console.log(page + " and " + link)
-    if (link){
-      return formatLink(link);
-    }
+  var previousLink;
+  var link = true;
+  var page = 1;
+  count = 0;
+  while (link){
+    previousLink = link;
+    link = getUnread(page);
+    console.log(page + ' and ' + link);
+    page++;
   }
+  return formatLink(previousLink);
 }
