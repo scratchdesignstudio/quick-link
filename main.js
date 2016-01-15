@@ -38,6 +38,7 @@ function getUnread(page){
         if (replyList[j].querySelector(".info > .content").textContent.match(/added/i)){
           lastReply = i;
           tempCount--;
+          break; 
         }
       }
     }
