@@ -38,7 +38,7 @@ function getUnread(page){
         if (replyList[j].querySelector(".info > .content").textContent.match(/added/i)){
           lastReply = i;
           tempCount--;
-          break; 
+          break;
         }
       }
     }
@@ -62,13 +62,6 @@ function changeLink(link){
 
 function changecount(count){
   document.getElementById("projectcount").innerHTML = count + " projects left to review!";
-  /* The lines below send some stats to a server I'm running. I'll remove them if there's any serious security problems */
-  var params = "?time=" + Date.now() + "&projects=" + count;
-  var url = "https://crossorigin.me/http://backtick.town:8765" + params;
-  var http = new XMLHttpRequest();
-  console.log(params);
-  http.open("GET", url, true);
-  http.send(null);
 
 }
 
