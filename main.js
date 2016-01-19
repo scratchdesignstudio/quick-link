@@ -76,5 +76,9 @@ function nextLink(){
     console.log(page + ' and ' + link);
     page++;
   }
-  return formatLink(previousLink);
+  if (previousLink != true){
+    return formatLink(previousLink);
+  } else {
+    return "https://scratch.mit.edu/studios/" + studioid;
+  }
 }
