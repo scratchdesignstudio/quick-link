@@ -79,6 +79,6 @@ function nextLink(){
   if (previousLink != true){
     return formatLink(previousLink);
   } else {
-    return "https://scratch.mit.edu/studios/" + studioid;
+    return "https://scratch.mit.edu/studios/" + studioid + "/comments/";
   }
 }
