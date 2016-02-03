@@ -1,4 +1,17 @@
 var studioid = 1788915;
+
+var request = new XMLHttpRequest();
+request.open('GET', 'https://api.scratch.mit.edu/proxy/featured', false);  // `false` makes the request synchronous
+request.send(null);
+
+if (request.status === 200) {
+  studioid = JSON.parse(request.responseText).scratch_design_studio[0].gallery_id;
+  console.log('found latest studio');
+} else {
+  studioid = 0;
+  console.log("ERROR");
+}
+
 var curators = ["technoboy10", "The_Grits", "4LeafClovR", "puppymk", "Malik44", "CrazyNimbus", "fmtfmtfmt2", "GreenIeaf", "st19_galla", "joletole", "Hamish752", "ceebee", "speakvisually"];
 var count = 0;
 function getUnread(page){
