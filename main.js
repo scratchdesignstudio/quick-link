@@ -12,7 +12,7 @@ if (request.status === 200) {
   console.log("ERROR");
 }
 
-var curators = ["technoboy10", "The_Grits", "4LeafClovR", "puppymk", "Malik44", "CrazyNimbus", "fmtfmtfmt2", "GreenIeaf", "st19_galla", "joletole", "Hamish752", "ceebee", "speakvisually*"];
+var curators = ["technoboy10", "The_Grits", "4LeafClovR", "puppymk", "Malik44", "CrazyNimbus", "fmtfmtfmt2", "GreenIeaf", "st19_galla", "joletole", "Hamish752", "Abstract-", "ceebee*", "speakvisually*"];
 var count = 0;
 function getUnread(page){
   var commentList;
