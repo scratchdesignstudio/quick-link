@@ -1,4 +1,4 @@
-var studioid = 1788915;
+var studioid = 1999784;
 
 var request = new XMLHttpRequest();
 request.open('GET', 'https://api.scratch.mit.edu/proxy/featured', false);  // `false` makes the request synchronous
