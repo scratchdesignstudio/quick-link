@@ -38,7 +38,7 @@ function getUnread(page){
 
     }
   }
-  xml.open("GET", "https://crossorigin.me/https://scratch.mit.edu/site-api/comments/gallery/" + studioid + "/?page=" + page , false);
+  xml.open("GET", "https://edu.crossorigin.me/https://scratch.mit.edu/site-api/comments/gallery/" + studioid + "/?page=" + page , false);
   xml.send(null);
 
   //Parse through array
