@@ -65,6 +65,41 @@ function getUnread(page){
 
 }
 
+function getCurators(){
+    var curatorReq = new XMLHttpRequest();
+    curatorReq.onreadystatechange = function(){
+      if (curatorReq.readyState = 4){
+        var container = document.implementation.createHTMLDocument().documentElement;
+        container.innerHTML = curatorReq.responseText;
+        curatorList = Array.from(container.querySelectorAll('li > .avatar > .title > a')).map(
+          function(person){
+            return person.innerHTML;
+          }
+        )
+      }
+    }
+    curatorReq.open("GET", "https://edu.crossorigin.me/https://scratch.mit.edu/site-api/users/curators-in/" + studioid + "/1/" , false);
+    curatorReq.send(null);
+
+    var ownerReq = new XMLHttpRequest();
+    ownerReq.onreadystatechange = function(){
+      if (ownerReq.readyState = 4){
+        var container = document.implementation.createHTMLDocument().documentElement;
+        container.innerHTML = ownerReq.responseText;
+        ownerList = Array.from(container.querySelectorAll('li > .avatar > .title > a')).map(
+          function(person){
+            return person.innerHTML;
+          }
+        )
+      }
+    }
+    ownerReq.open("GET", "https://edu.crossorigin.me/https://scratch.mit.edu/site-api/users/owners-in/" + studioid + "/1/" , false);
+    ownerReq.send(null);
+
+    curators = ownerList.concat(curatorList);
+    console.log(curators);
+}
+
 function formatLink(lastCommentId){
   return "https://scratch.mit.edu/studios/" + studioid + "/comments/#comments-" + lastCommentId;
 }
@@ -83,6 +118,7 @@ function nextLink(){
   var link = true;
   var page = 1;
   count = 0;
+  getCurators();
   while (link){
     previousLink = link;
     link = getUnread(page);
