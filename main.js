@@ -48,11 +48,9 @@ function getUnread(page){
     var replyList = commentList[i].querySelectorAll('.reply > .comment'); //Get all comments
     for (j = 0; j < replyList.length; j++){ //go through replies
       if(curators.indexOf(replyList[j].querySelector(".info > .name > a").innerHTML) != -1){ //pick comment by a curator
-        if (replyList[j].querySelector(".info > .content").textContent.match(/added/i)){
-          lastReply = i;
-          tempCount--;
-          break;
-        }
+        lastReply = i;
+        tempCount--;
+        break;
       }
     }
   }
