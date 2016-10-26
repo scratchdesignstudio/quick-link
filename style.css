@@ -7,21 +7,26 @@ a:link{
   color: white;
   background-color: transparent;
   text-decoration: none;
+  font-size:500%;
 }
 a:visited{
   color: white;
   background-color: transparent;
   text-decoration: none;
+  font-size:500%;
+  
 }
 a:hover{
   color: black;
   background-color: transparent;
   text-decoration: none;
+  font-size:600%;
 }
 a:active{
   color: black;
   background-color: transparent;
   text-decoration: none;
+  font-size:600%;
 }
 #link{
   display: block;
