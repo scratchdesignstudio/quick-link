@@ -12,7 +12,7 @@ if (request.status === 200) {
   console.log("ERROR");
 }
 
-var curators = ["technoboy10*", "The_Grits", "4LeafClovR", "puppymk", "Malik44", "CrazyNimbus", "fmtfmtfmt2", "GreenIeaf", "st19_galla", "joletole", "Hamish752", "Abstract-", "getbent", "Ionosphere", "Thinking_Upward", "PackersRuleGoPack", "Csoup", "coke11", "natalie*", "ceebee*", "speakvisually*"];
+var curators = ["technoboy10*", "The_Grits", "4LeafClovR", "puppymk", "Malik44", "CrazyNimbus", "fmtfmtfmt2", "GreenIeaf", "st19_galla", "joletole", "Hamish752", "Abstract-", "getbent", "Ionosphere", "Thinking_Upward", "PackersRuleGoPack", "Csoup", "coke11", "Thomas1-1", "-NinjaNarwhal-", "BY147258369", "-MidnightStudios", "samirathecatlol", "mundofinkyenglish", "natalie*", "ceebee*", "speakvisually*"];
 var count = 0;
 function getUnread(page){
   var commentList;
