@@ -104,6 +104,10 @@ function loadPage(page) {
     document.getElementById("projectcount").innerHTML = "Loading latest data... (page " + page + ")";
 }
 
+function updateStats(number) {
+    axios.post('http://backtick.town:9192/sds/' + (+ Date.now()) + '/' + number);
+}
+
 axios.all([getID(), getPeople('owners', getID), getPeople('curators', getID)])
     .then(function(info) {
         document.getElementById("projectcount").innerHTML = "Loading latest data...";
@@ -112,6 +116,7 @@ axios.all([getID(), getPeople('owners', getID), getPeople('curators', getID)])
         nextLink(info[0], info[1].concat(info[2]), 1, 0, ["https://scratch.mit.edu/studios/" + info[0], 0]).then(function (result) {
             changeLink(result[0]);
             changeCount(result[1]);
+            updateStats(result[1]); // Send stats (timestamp, number of projects) to a server for stuff!
             if (result[1] == 0) {
                 document.getElementById("link").innerHTML = "All done!"
             }
