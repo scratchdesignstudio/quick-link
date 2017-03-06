@@ -1,19 +1,25 @@
-var backupID = 3479432;
+var studioID = 3479432; // Set this to your own studio ID!
 var backupCurators = ["technoboy10*", "The_Grits", "4LeafClovR", "puppymk", "Malik44", "CrazyNimbus", "fmtfmtfmt2", "GreenIeaf", "st19_galla", "joletole", "Hamish752", "Abstract-", "getbent", "Ionosphere", "Thinking_Upward", "PackersRuleGoPack", "Csoup", "coke11", "Thomas1-1", "-NinjaNarwhal-", "BY147258369", "-MidnightStudios", "samirathecatlol", "mundofinkyenglish", "natalie*", "ceebee*", "speakvisually*"];
 
 function getID() {
+    /*
+     * This is a pretty complicated function, but it's the only thing you need to change to adapt this for your own studio.
+     * Comment out `return axios...` and uncomment the other bit at the bottom and the system will work with your custom studio ID.
+     */
+
     return axios.get('https://api.scratch.mit.edu/proxy/featured')
     .then(function (response) {
         return response.data.scratch_design_studio[0].gallery_id;
     })
     .catch(function (error) {
-        return backupID;
+        return studioID;
     });
+
+    //return new Promise(function (resolve, reject) {resolve(studioID)});
 }
 
 function getPeople(type, idPromise) { // "curators" or "owners" (managers)
     return idPromise().then(function (id) {
-        console.log(id);
         return axios.get("https://crossorigin.me/https://scratch.mit.edu/site-api/users/" + type + "-in/" + id + "/1/", {responseType: 'document'})
             .then(function(response) {
                 return parsePeople(response.data);
@@ -31,13 +37,14 @@ function parsePeople(page) {
 
 function nextLink(id, curators, page, count, previous) {
     if (id) {
-        console.log(page);
+        console.log('Checking page ' + page + '...');
+        loadPage(page);
         return axios.get("https://crossorigin.me/https://scratch.mit.edu/site-api/comments/gallery/" + id, {responseType: 'document', params: {page: page}}).then(function (response) {
             result = parseComments(id, curators, response.data, count);
             if (result[0]) { // There's more comments to find!
                 return nextLink(id, curators, ++page, result[1], result);
             } else {
-                console.log(previous);
+                console.log("Found latest link!");
                 return previous;
             }
         });
@@ -86,18 +93,27 @@ function formatLink(id, lastCommentId){
 
 function changeLink(link){
   document.getElementById("link").href=link;
+  document.getElementById("link").innerHTML = "Next Project!"
 }
 
 function changeCount(count){
   document.getElementById("projectcount").innerHTML = count + " projects left to review!";
 }
 
+function loadPage(page) {
+    document.getElementById("projectcount").innerHTML = "Loading latest data... (page " + page + ")";
+}
+
 axios.all([getID(), getPeople('owners', getID), getPeople('curators', getID)])
     .then(function(info) {
         document.getElementById("projectcount").innerHTML = "Loading latest data...";
+        console.log("Studio ID is " + info[0]);
         id = info[0];
         nextLink(info[0], info[1].concat(info[2]), 1, 0, ["https://scratch.mit.edu/studios/" + info[0], 0]).then(function (result) {
             changeLink(result[0]);
             changeCount(result[1]);
+            if (result[1] == 0) {
+                document.getElementById("link").innerHTML = "All done!"
+            }
         });
     });
