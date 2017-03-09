@@ -20,7 +20,7 @@ function getID() {
 
 function getPeople(type, idPromise) { // "curators" or "owners" (managers)
     return idPromise().then(function (id) {
-        return axios.get("https://crossorigin.me/https://scratch.mit.edu/site-api/users/" + type + "-in/" + id + "/1/", {responseType: 'document'})
+        return axios.get("https://scratch.mit.edu/site-api/users/" + type + "-in/" + id + "/1/", {responseType: 'document'})
             .then(function(response) {
                 return parsePeople(response.data);
             });
