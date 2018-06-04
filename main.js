@@ -39,7 +39,7 @@ function nextLink(id, curators, page, count, previous) {
     if (id) {
         console.log('Checking page ' + page + '...');
         loadPage(page);
-        return axios.get("https://crossorigin.me/https://scratch.mit.edu/site-api/comments/gallery/" + id, {responseType: 'document', params: {page: page}}).then(function (response) {
+        return axios.get("https://cors-anywhere.herokuapp.com/https://scratch.mit.edu/site-api/comments/gallery/" + id, {responseType: 'document', params: {page: page}}).then(function (response) {
             result = parseComments(id, curators, response.data, count);
             if (result[0]) { // There's more comments to find!
                 return nextLink(id, curators, ++page, result[1], result);
